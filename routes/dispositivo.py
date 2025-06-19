@@ -15,6 +15,9 @@ def FUNCION_IA(ruta_imagen):
 
 @dispositivo_bp.route('/dispositivo', methods=['POST'])
 def recibir_nuevos_datos_desde_dispositivo():
+    print(request.files)
+    print(request.form)
+
     if 'imagen' not in request.files or 'peso' not in request.form or 'id_usuario' not in request.form:
         return jsonify({'error': 'Faltan campos requeridos: imagen, peso o id_usuario'}), 400
 
@@ -37,6 +40,7 @@ def recibir_nuevos_datos_desde_dispositivo():
         img = Image.open(imagen_file)
         rgb_im = img.convert('RGB')
         rgb_im.save(ruta_destino, format='JPEG')
+        print("\n SE GUARDO \n")
     except Exception as e:
         return jsonify({'error': f'No se pudo procesar la imagen: {str(e)}'}), 500
     
@@ -46,12 +50,14 @@ def recibir_nuevos_datos_desde_dispositivo():
         # Aquí clasifico el vegetal
         cambio = analizar_imagen(ruta_destino, peso, id_usuario)
     except Exception as e:
-        os.remove(ruta_destino)
+        pass
+        #os.remove(ruta_destino)
         return jsonify({'error': f'Error en IA: {str(e)}'}), 500
 
     # Eliminar imagen después de usarla
     try:
-        os.remove(ruta_destino)
+        pass
+        #os.remove(ruta_destino)
     except Exception:
         pass  # Si falla la eliminación, no es crítico
 
