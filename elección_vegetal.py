@@ -35,6 +35,7 @@ def agregar_vegetal(ruta_imagen, peso, id_usuario):
                 return Inventario.crear(id_usuario, candidato, peso, 0, False)     
             except ValueError as e:
                 print(e)
+    print("Dentro de la imagen no se pudo detectar ningún vegetal con un peso razonable")
     raise ValueError("Dentro de la imagen no se pudo detectar ningún vegetal con un peso razonable")
 
 
@@ -70,7 +71,7 @@ def traducir_a_espanol(nombre_ingles):
     traducciones = {
         'apple': 'Manzana',
         'avocado': 'Palta',
-        'banana': 'Plátano',
+        'banana': 'Banana',
         'beans': 'Porotos',
         'blackberrie': 'Mora',
         'cabbage': 'Repollo',
@@ -98,7 +99,7 @@ def peso_razonable(vegetal, peso):
     pesos = {
         'Manzana': (0.1, 0.4),
         'Palta': (0.1, 0.3),
-        'Plátano': (0.1, 0.3),
+        'Banana': (0.1, 0.3),
         'Porotos': (0.05, 1.0),
         'Mora': (0.05, 0.5),
         'Repollo': (0.5, 2.5),

@@ -14,13 +14,49 @@ def entregar_inventario():
         return jsonify({'error': 'Falta id_usuario como query parameter'}), 400
 
     inventarios = Inventario.obtener_por_usuario_no_consumidos(id_usuario)
+
+    dias_maximos_refrigerador = {
+        'Manzana': 7,       
+        'Palta': 4,        
+        'Banana': 2,      
+        'Porotos': 7,     
+        'Mora': 3,              
+        'Repollo': 14,    
+        'Cactus': 10,            
+        'Cajú': 5,             
+        'Zanahoria': 21,      
+        'Chirimoya': 3,      
+        'Pepino': 7,            
+        'Berenjena': 5,         
+        'Grosella': 3,           
+        'Pera': 5,                  
+        'Pistacho': 180,             
+        'Membrillo': 14,             
+        'Tomate': 3,                 
+        'Zapallito Italiano': 5,     
+        'Cereza': 5,           
+    }
+    
+    imagenes_disponibles = {
+        "Manzana": 'https://media-public.canva.com/uqAe8/MAFDF5uqAe8/1/tl.png',
+        "Kiwi": 'https://media-public.canva.com/-hCL8/MAFV79-hCL8/1/t.png',
+        "Berenjena": 'https://www.pngplay.com/wp-content/uploads/2/Eggplant-Transparent-Images.png',
+        "Banana": 'https://pngimg.com/d/banana_PNG844.png',
+        "Tomate": 'https://www.pngplay.com/wp-content/uploads/2/Tomato-Transparent-Images.png',
+    }
+    imagen_por_defecto = 'https://w7.pngwing.com/pngs/973/684/png-transparent-fresh-fruits-illustration-juice-auglis-euclidean-fruit-melon-fruit-natural-foods-food-strawberries-thumbnail.png'
+
+    print([inv.vegetal for inv in inventarios])
+
     resultado = [
         {
             'id': inv.id,
-            'vegetal': inv.vegetal,
-            'peso': inv.peso,
-            'dias': inv.dias,
-            'consumido': inv.consumido
+            'name': inv.vegetal,
+            'daysInUse': inv.dias,
+            'expirationDays': dias_maximos_refrigerador[inv.vegetal],
+            "photo": imagenes_disponibles.get(inv.vegetal.lower(), imagen_por_defecto),
+
+
         } for inv in inventarios
     ]
     
