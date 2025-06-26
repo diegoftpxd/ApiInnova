@@ -43,6 +43,8 @@ def entregar_inventario():
         "Berenjena": 'https://www.pngplay.com/wp-content/uploads/2/Eggplant-Transparent-Images.png',
         "Banana": 'https://pngimg.com/d/banana_PNG844.png',
         "Tomate": 'https://www.pngplay.com/wp-content/uploads/2/Tomato-Transparent-Images.png',
+        "Pepino": 'https://static.vecteezy.com/system/resources/thumbnails/029/720/727/small_2x/cucumber-transparent-background-png.png',
+        "Zanahoria": 'https://static.vecteezy.com/system/resources/thumbnails/025/257/374/small/single-fresh-orange-carrot-isolated-with-clipping-path-and-shadow-in-file-format-close-up-of-healthy-vegetable-root-png.png' 
     }
     imagen_por_defecto = 'https://w7.pngwing.com/pngs/973/684/png-transparent-fresh-fruits-illustration-juice-auglis-euclidean-fruit-melon-fruit-natural-foods-food-strawberries-thumbnail.png'
 
@@ -54,7 +56,7 @@ def entregar_inventario():
             'name': inv.vegetal,
             'daysInUse': inv.dias,
             'expirationDays': dias_maximos_refrigerador[inv.vegetal],
-            "photo": imagenes_disponibles.get(inv.vegetal.lower(), imagen_por_defecto),
+            "photo": imagenes_disponibles.get(inv.vegetal, imagen_por_defecto),
 
 
         } for inv in inventarios
